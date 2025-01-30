@@ -6,15 +6,16 @@ const loadelement = document.createElement('p');
 imgbox.append(loadelement);
 const getQR = async ()=>{
     loadelement.hidden = false;
-    loadelement.classList.toggle('invalid-input');
     if(input.value.length > 0){
     qrImage.src = '';
+    loadelement.classList.remove('invalid-input');
     loadelement.innerHTML = 'Loading ...';
     const response = await fetch(`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${input.value}`)
     qrImage.src = response.url;
     loadelement.hidden = true;
     }
     else{
+        qrImage.src = '';
         loadelement.classList.add('invalid-input');
         loadelement.innerHTML = 'Invalid Input !';
     }
